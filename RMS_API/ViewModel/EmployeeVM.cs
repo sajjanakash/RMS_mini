@@ -23,7 +23,7 @@ namespace RMS_API.ViewModel
         [Required(ErrorMessage = "Please enter Date Of Birth")]
         public DateTime DateOfBirth { get; set; }
 
-        [Required(ErrorMessage = "Please enter Experience")]
+        [Required(ErrorMessage = "Please Enter Experience")]
         public int Experience { get; set; }
 
         [Required(ErrorMessage = "Please enter Designation")]
