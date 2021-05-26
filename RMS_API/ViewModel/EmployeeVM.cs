@@ -26,7 +26,7 @@ namespace RMS_API.ViewModel
         [Required(ErrorMessage = "Please Enter Experience")]
         public int Experience { get; set; }
 
-        [Required(ErrorMessage = "Please enter Designation")]
+        [Required(ErrorMessage = "Please Enter Designation")]
         public string Designation { get; set; }
 
         [Required(ErrorMessage = "Please enter Skills")]
