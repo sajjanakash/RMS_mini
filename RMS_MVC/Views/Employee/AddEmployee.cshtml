@@ -1,0 +1,125 @@
+﻿@{ ViewData["Title"] = "Home Page"; }
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+<div class="container">
+    <table class="table table-bordered">
+
+        <tr>
+            <td>User Name</td>
+            <td>@Html.TextBox("userName")</td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td>@Html.TextBox("password")</td>
+        </tr>
+        <tr>
+            <td>Employee Name</td>
+            <td>@Html.TextBox("empName")</td>
+        </tr>
+        <tr>
+            <td>Employee Id</td>
+            <td>@Html.TextBox("empId")</td>
+        </tr>
+        <tr>
+            <td>Date Of Birth</td>
+            <td>@Html.TextBox("dateOfBirth")</td>
+        </tr>
+        <tr>
+            <td>Experience</td>
+            <td>@Html.TextBox("experience")</td>
+        </tr>
+        <tr>
+            <td>Designation</td>
+            <td>@Html.TextBox("designation")</td>
+        </tr>
+        <tr>
+            <td>Skill</td>
+            <td>@Html.TextBox("skill")</td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <button class="btn btn-danger" id="btnadd">Add</button>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <span class="text-info"></span>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+<script type="text/javascript">
+    $('#btnadd').click(() => {
+        var arr = $('#skill').val();
+        var skillArr = arr.split(",");
+        let UserName = $('#userName').val();
+        let Password = $('#password').val();
+        let EmpName = $('#empName').val();
+        let EmpId = $('#empId').val();
+        let DOB = $('#dateOfBirth').val();
+        let Exp = $('#experience').val();
+        let Designation = $('#designation').val();
+        let Skills = skillArr;
+
+
+
+        let item = { userName: UserName, password: Password, empName: EmpName, empId: EmpId, dateOfBirth: DOB, experience: Exp, designation: Designation, skill:Skills };
+        console.log(item)
+
+        $.ajax({
+            type: "POST",
+            url: "https://localhost:44317/api/Employee",
+            data: JSON.stringify(item),
+            contentType: 'application/json',
+            success: function (response) {
+                console.log(response)
+                $('span').html(response);
+                window.location.reload();
+            },
+            error: function (err) {
+                if (err.responseJSON.errors.UserName) {
+                    alert(err.responseJSON.errors.UserName[0])
+                    $('span').html(err.responseJSON.errors.UserName[0]);
+                }
+                else if (err.responseJSON.errors.Password) {
+                    alert(err.responseJSON.errors.Password[0])
+                    $('span').html(err.responseJSON.errors.Password[0]);
+                }
+                else if (err.responseJSON.errors.EmpName) {
+                    alert(err.responseJSON.errors.EmpName[0])
+                    $('span').html(err.responseJSON.errors.EmpName[0]);
+                }
+                else if (err.responseJSON.errors.EmpId) {
+                    alert(err.responseJSON.errors.EmpId[0])
+                    $('span').html(err.responseJSON.errors.EmpId[0]);
+                }
+                else if (err.responseJSON.errors.DOB) {
+                    alert(err.responseJSON.errors.DOB[0])
+                    $('span').html(err.responseJSON.errors.DOB[0]);
+                }
+                else if (err.responseJSON.errors.experience) {
+                    alert(err.responseJSON.errors.experience[0])
+                    $('span').html(err.responseJSON.errors.experience[0]);
+                }
+                else if (err.responseJSON.errors.Designation) {
+                    alert(err.responseJSON.errors.Designation[0])
+                    $('span').html(err.responseJSON.errors.Designation[0]);
+                }
+                else if (err.responseJSON.errors.skill) {
+                    alert(err.responseJSON.errors.skill[0])
+                    $('span').html(err.responseJSON.errors.skill[0]);
+                }
+                else {
+                    alert("All Fields Are Required");
+                }
+            }
+           
+
+        });
+    })
+</script>
