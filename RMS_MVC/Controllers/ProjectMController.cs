@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace RMS_MVC.Controllers
 {
-    public class EmployeeController : Controller
+    public class ProjectMController : Controller
     {
-        public IActionResult AddEmployee()
+        public IActionResult Index()
         {
             return View();
         }
-        public IActionResult Index()
+        public IActionResult ProjRequirement()
         {
             return View();
         }

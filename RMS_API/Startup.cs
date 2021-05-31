@@ -44,8 +44,8 @@ namespace RMS_API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "RMS_API", Version = "v1" });
             });
-            services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("connect")));
-            services.AddTransient<EmployeeRepo>();
+           
+            services.AddScoped<IEmployee,EmployeeRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

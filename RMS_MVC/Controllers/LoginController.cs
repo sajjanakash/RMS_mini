@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace RMS_MVC.Controllers
 {
-    public class EmployeeController : Controller
+    public class LoginController : Controller
     {
-        public IActionResult AddEmployee()
-        {
-            return View();
-        }
         public IActionResult Index()
         {
             return View();

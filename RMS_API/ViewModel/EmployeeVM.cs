@@ -8,8 +8,6 @@ namespace RMS_API.ViewModel
 {
     public class EmployeeVM
     {
-        [Required(ErrorMessage = "Please enter UserName")]
-        public string UserName { get; set; }
 
         [Required(ErrorMessage = "Please enter Password")]
         public string Password { get; set; }
@@ -26,7 +24,6 @@ namespace RMS_API.ViewModel
         [Required(ErrorMessage = "Please Enter Experience")]
         public int Experience { get; set; }
 
-        [Required(ErrorMessage = "Please Enter Designation")]
         public string Designation { get; set; }
 
         [Required(ErrorMessage = "Please enter Skills")]

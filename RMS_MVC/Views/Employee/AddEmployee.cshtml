@@ -7,8 +7,8 @@
     <table class="table table-bordered">
 
         <tr>
-            <td>User Name</td>
-            <td>@Html.TextBox("userName")</td>
+            <td>Employee Id</td>
+            <td>@Html.TextBox("empId")</td>
         </tr>
         <tr>
             <td>Password</td>
@@ -17,10 +17,6 @@
         <tr>
             <td>Employee Name</td>
             <td>@Html.TextBox("empName")</td>
-        </tr>
-        <tr>
-            <td>Employee Id</td>
-            <td>@Html.TextBox("empId")</td>
         </tr>
         <tr>
             <td>Date Of Birth</td>
@@ -32,23 +28,36 @@
         </tr>
         <tr>
             <td>Designation</td>
-            <td>@Html.TextBox("designation")</td>
-        </tr>
-        <tr>
-            <td>Skill</td>
-            <td>@Html.TextBox("skill")</td>
-        </tr>
+            @* <td>@Html.TextBox("designation")</td>*@
+            <td>
+                @Html.DropDownList("designation", new List<SelectListItem>
+                {
+               new SelectListItem { Text = "Admin" },
+               new SelectListItem { Text = "Resource Manager" },
+                new SelectListItem { Text = "Project Manager" },
+                 new SelectListItem { Text = "HR Manager" },
+                  new SelectListItem { Text = "Team Lead" },
+                   new SelectListItem { Text = "Software Engineer" },
+                    new SelectListItem { Text = "Sernior Software Engineer" },
+                     new SelectListItem { Text = "Deputy Manager" }
+            }, "Please Select")
+        </td>
+    </tr>
+    <tr>
+        <td>Skill</td>
+        <td>@Html.TextBox("skill")</td>
+    </tr>
 
-        <tr>
-            <td colspan="2">
-                <button class="btn btn-danger" id="btnadd">Add</button>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <span class="text-info"></span>
-            </td>
-        </tr>
+    <tr>
+        <td colspan="2">
+            <button class="btn btn-danger" id="btnadd">Add</button>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <span class="text-info"></span>
+        </td>
+    </tr>
     </table>
 </div>
 

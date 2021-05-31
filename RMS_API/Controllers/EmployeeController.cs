@@ -14,9 +14,9 @@ namespace RMS_API.Controllers
     public class EmployeeController : ControllerBase
     {
         private EmployeeRepo _repo;
-        public EmployeeController(EmployeeRepo repo)
+        public EmployeeController()
         {
-            _repo = repo;
+            _repo = new EmployeeRepo();
         }
 
         [HttpPost]
@@ -26,6 +26,8 @@ namespace RMS_API.Controllers
             return Ok("Data Added Successfully");
 
         }
+
+       
 
     }
 }

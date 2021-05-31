@@ -1,0 +1,56 @@
+﻿@model RMS_MVC.Models.Employee
+@{ ViewData["Title"] = "Home Page"; }
+
+<h2>Log In</h2>
+<br />
+<div>
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div>
+                @using (Html.BeginForm("LoginUser", "Home", FormMethod.Post, new { role = "form" }))
+                {
+                    <form>
+                        @Html.AntiForgeryToken()
+                        <div>
+                            <label>Employee Id</label><br />
+                        </div>
+                        <div>
+                            @Html.TextBoxFor(m => m.EmpId, new { @class = "form-control txtbox" })
+                        </div>
+                        <div style="padding-top:20px;"></div>
+                        <div>
+                            <label>Password</label><br />
+                        </div>
+                        <div>
+                            @Html.TextBoxFor(m => m.Password, new { @class = "form-control txtbox" })
+                        </div>
+                         <div>
+                            <label>Category</label><br />
+                        </div>
+                         <div>
+                            @* @Html.TextBoxFor(m => m.Category, new { @class = "form-control txtbox" })*@
+                             @Html.DropDownListFor(m=>m.Designation, new List<SelectListItem>
+                            {
+                                new SelectListItem { Text = "Admin" },
+                                new SelectListItem { Text = "Resource Manager" },
+                                new SelectListItem { Text = "Project Manager" },
+                                new SelectListItem { Text = "Employee" }
+                            }, "Please Select")
+                         </div>
+                        <div style="display:inline-flex;">
+                            @*<input class="btn btn-primary btn-lg rph-login-button" type="submit" value="Login" />*@
+                            <input type="submit" class="btn btn-outline-success" style="margin: 10px" value="login">
+                           @* <a class="btn btn-outline-success" asp-controller="Customer" asp-action="Create" style="text-decoration:none;margin:10px">Register </a>
+                            <a class="btn btn-outline-success" asp-controller="Home" asp-action="Index" style="text-decoration:none;margin:10px">Cancel </a>
+                       *@ </div>
+                    </form>}
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<script>
+        function check() {
+            alert("Sucessfully log in");
+        }
+    </script>*@

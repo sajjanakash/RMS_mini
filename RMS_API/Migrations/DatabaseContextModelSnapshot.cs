@@ -51,9 +51,6 @@ namespace RMS_API.Migrations
                     b.Property<bool?>("Status")
                         .HasColumnType("bit");
 
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("EmpId");
 
                     b.ToTable("Employees");

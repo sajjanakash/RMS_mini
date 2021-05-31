@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RMS_API.Model
+namespace Authenticate_API.Model
 {
-    public class Employee
+    public class UserInfo
     {
-        [Required(ErrorMessage = "Please enter UserName")]
-
         [Key]
         public string EmpId { get; set; }
         public string Password { get; set; }
+
         public string EmpName { get; set; }
 
         public DateTime DateOfBirth { get; set; }
@@ -22,10 +22,5 @@ namespace RMS_API.Model
         public bool? IsAssigned { get; set; }
         public string ProjectCode { get; set; }
         public bool? Status { get; set; }
-
-        //Navigation Property
-
-        public List<EmployeeSkill> EmployeeSkill { get; set; }
-
     }
 }

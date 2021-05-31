@@ -6,15 +6,20 @@ using System.Threading.Tasks;
 
 namespace RMS_MVC.Controllers
 {
-    public class EmployeeController : Controller
+    public class ResourceMController : Controller
     {
-        public IActionResult AddEmployee()
-        {
-            return View();
-        }
         public IActionResult Index()
         {
             return View();
         }
+        public IActionResult SkillUp()
+        {
+            return View();
+        }
+        public IActionResult SkillMap()
+        {
+            return View();
+        }
+
     }
 }

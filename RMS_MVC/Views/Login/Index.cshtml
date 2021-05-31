@@ -1,0 +1,77 @@
+﻿<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<h2>Log in</h2>
+
+<div class="container">
+    <table class="table table-striped">
+        <tr>
+            <td>Employee Id</td>
+            <td><input type="text" placeholder="Enter UserName" id="UserName" /></td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td><input type="password" placeholder="Enter password" id="Password" /></td>
+        </tr>
+        <tr>
+            <td>Category</td>
+            <td>
+                @Html.DropDownList("Category", new List<SelectListItem>
+                                {
+                                new SelectListItem { Text = "Admin" },
+                                new SelectListItem { Text = "Resource Manager" },
+                                new SelectListItem { Text = "Project Manager" },
+                                new SelectListItem { Text = "Employee" }
+                            }, "Please Select")
+                    </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <button class="btn btn-outline-success" id="btnlogin">Log in</button>
+                @* <a class="btn btn-outline-success" asp-controller="Customer" asp-action="Create" style="text-decoration:none;margin:10px">Register </a>
+                <a class="btn btn-outline-success" asp-controller="Home" asp-action="Index" style="text-decoration:none;margin:10px">Cancel </a>*@
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+<script type="text/javascript">
+    $('#btnlogin').click(() => {
+
+        let empId = $('#UserName').val();
+        let pass = $('#Password').val();
+        let category = $('#Category').val();
+
+        let item = { EmpId: empId, Password: pass, Designation:category};
+
+
+            $.ajax({
+                type: "POST",
+                url: "https://localhost:44308/api/Token",
+                data: JSON.stringify(item),
+                contentType: 'application/json',
+                success: function (response) {
+                    var output = JSON.stringify(response);
+                    var op = output.split(",")[1].split(":")[1].split('"')[1];
+                    if (op == "Admin") {
+                        window.location = "/Admin/Index";
+                        alert("Welcome!Sucessfully Log in");
+                    }
+                    else if (op == "Employee") {
+                        window.location = "/Employee/Index";
+                        alert("Welcome!Sucessfully Log in");
+                    }
+                    else if (op == "Resource Manager") {
+                        window.location = "/ResourceM/Index";
+                        alert("Welcome!Sucessfully Log in");
+                    }
+                    else if (op == "Project Manager") {
+                        window.location = "/ProjectM/Index";
+                        alert("Welcome!Sucessfully Log in");
+                    }
+                },
+                error: function (err) {
+                    alert(err.responseText)
+                }
+            });
+    })</script>

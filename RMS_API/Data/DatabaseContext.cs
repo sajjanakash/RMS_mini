@@ -9,9 +9,9 @@ namespace RMS_API.Data
 {
     public class DatabaseContext:DbContext
     {
-        public DatabaseContext(DbContextOptions<DatabaseContext> options):base(options)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-
+            optionsBuilder.UseSqlServer("Server=.;Database=RMS_DB; Trusted_Connection=True; MultipleActiveResultsets=True");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

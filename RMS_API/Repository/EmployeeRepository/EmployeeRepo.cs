@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace RMS_API.Repository.EmployeeRepository
 {
-    public class EmployeeRepo
+    public class EmployeeRepo:IEmployee
     {
         private DatabaseContext _context;
-        public EmployeeRepo(DatabaseContext context)
+        public EmployeeRepo()
         {
-            _context = context;
+            _context = new DatabaseContext();
         }
 
         public void AddEmployeeCredentials(EmployeeVM employee)
@@ -21,9 +21,9 @@ namespace RMS_API.Repository.EmployeeRepository
             
             var data = new Employee()
             {
-                UserName=employee.UserName,
-                Password=employee.Password,
+
                 EmpId = employee.EmpId,
+                Password =employee.Password,
                 EmpName = employee.EmpName,
                 DateOfBirth =employee.DateOfBirth,
                 Designation=employee.Designation,
@@ -43,5 +43,11 @@ namespace RMS_API.Repository.EmployeeRepository
                 _context.SaveChanges();
             }
         }
+
+        /*public Employee SkillsUpdation(EmployeeVM employee)
+        {
+            
+            return employee;
+        }*/
     }
 }

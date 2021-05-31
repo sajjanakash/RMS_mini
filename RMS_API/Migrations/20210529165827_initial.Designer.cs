@@ -10,8 +10,8 @@ using RMS_API.Data;
 namespace RMS_API.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20210524100738_initEmp")]
-    partial class initEmp
+    [Migration("20210529165827_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,14 +50,8 @@ namespace RMS_API.Migrations
                     b.Property<string>("ProjectCode")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SkillSet")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool?>("Status")
                         .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("EmpId");
 
