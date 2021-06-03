@@ -16,5 +16,10 @@ namespace RMS_MVC.Controllers
         {
             return View();
         }
+
+        public IActionResult UpdateEmployee()
+        {
+            return View();
+        }
     }
 }

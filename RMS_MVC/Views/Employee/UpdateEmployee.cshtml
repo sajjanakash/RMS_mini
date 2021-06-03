@@ -1,0 +1,181 @@
+﻿<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#" style="color:gold">Resource Management Application</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#" style="color:gold">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" style="color:gold">Link</a>
+                </li>
+                <li class="nav-item dropdown" style="margin-left: 450px">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:gold">
+                        Welcome <span id="abc"></span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><button class="dropdown-item" id="logout" style="height:50px;width:100px;">Logout</button></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<br />
+
+<div class="container">
+    <table class="table table-bordered">
+
+        <tr>
+            <td>Employee Id</td>
+            <td><span id="empId"></span></td>
+        </tr>
+        <tr>
+            <td>Employee Name</td>
+            <td>@Html.TextBox("empName")</td>
+        </tr>
+        <tr>
+            <td>Email Id</td>
+            <td>@Html.TextBox("emailId")</td>
+        </tr>
+        <tr>
+            <td>Date Of Birth</td>
+            <td>@Html.TextBox("dateOfBirth")</td>
+        </tr>
+        <tr>
+            <td>Experience</td>
+            <td>@Html.TextBox("experience")</td>
+        </tr>
+        <tr>
+            <td>Skills</td>
+            <td>@Html.TextArea("skills")</td>
+        </tr>
+        <tr>
+            <td>Designation</td>
+            <td>@Html.TextBox("designation")</td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <button class="btn btn-danger" id="btnsearch">Get Details</button>
+                <button class="btn btn-danger" id="btnedit">Update</button>
+
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <span class="text-info"></span>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+
+
+<script>
+    $('#btnsearch').click(() => {
+        let Id = sessionStorage.getItem("Id");
+        $.ajax({
+
+            type: "GET",
+            url: "https://localhost:44317/api/Employee/" + Id,
+            contentType: 'application/json',
+            success: function (response) {
+                console.log(response)
+                $('#empName').val(response.empName);
+                $('#emailId').val(response.emailId);
+                $('#dateOfBirth').val(response.dateOfBirth);
+                $('#experience').val(response.experience);
+                $('#skills').val(response.skills);
+                $('#designation').val(response.designation);
+            },
+            error: function (err) {
+                console.log(err.responseText)
+                $('span').html(err.responseText);
+            }
+
+        });
+    })
+
+    $('#btnedit').click(() => {
+        let Id = sessionStorage.getItem("Id");
+        let Experience = $('#experience').val();
+        let item = {  experience: Experience };
+
+        console.log(item)
+
+        $.ajax({
+            type: "PUT",
+            url: "https://localhost:44317/api/Employee/Experience/" + Id,
+            data: JSON.stringify(item),
+            contentType: 'application/json',
+            success: function (response) {
+                console.log(response)
+                //  $('span').html(response);
+                window.location.reload();
+            },
+            error: function (err) {
+                console.log(err.responseText)
+                $('span').html(err.responseText);
+            }
+        });
+    })
+
+    $('#btnedit').click(() => {
+        let Id = sessionStorage.getItem("Id");
+        let Skills = $('#skills').val();
+        let item = { skills: Skills };
+
+        console.log(item)
+
+        $.ajax({
+            type: "PUT",
+            url: "https://localhost:44317/api/Employee/Skills/" + Id,
+            data: JSON.stringify(item),
+            contentType: 'application/json',
+            success: function (response) {
+                console.log(response)
+                //  $('span').html(response);
+                window.location.reload();
+            },
+            error: function (err) {
+                console.log(err.responseText)
+                $('span').html(err.responseText);
+            }
+        });
+    })
+
+
+</script>
+
+<script>
+    console.log(sessionStorage.getItem("token"));
+    console.log(sessionStorage.getItem("Id"));
+
+    $("#abc").html(sessionStorage.getItem("Id"))
+    $("#empId").html(sessionStorage.getItem("Id"))
+
+    $("#logout").click(function () {
+        sessionStorage.clear("token");
+        var value = confirm("Are You Sure!");
+        if (value == true) {
+            window.location.href = "/Login/Index";
+        }
+    });
+
+    $("#empName").prop("readonly", true);
+    $("#emailId").prop("readonly", true);
+    $("#dateOfBirth").prop("readonly", true);
+    $("#designation").prop("readonly", true);
+</script>

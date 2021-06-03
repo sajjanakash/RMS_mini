@@ -1,12 +1,39 @@
 ﻿<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<div id="imgLogin">
 
-<h2>Log in</h2>
+    <br />
+    <br />
+    <br />
+    <br />
 
-<div class="container">
-    <table class="table table-striped">
+    <div class="container" style="box-sizing:border-box;margin-left:50px;">
+        <h2>Log in</h2>
+        <br />
+        <br />
+        <h5>Employee Id</h5>
+        <input type="text" placeholder="Enter EmployeeId" id="UserName" />
+
+
+        <h5>Password</h5>
+        <input type="password" placeholder="Enter password" id="Password" />
+
+        <h5>Category</h5>
+        @Html.DropDownList("Category", new List<SelectListItem>
+{
+                                new SelectListItem { Text = "Admin" },
+                                new SelectListItem { Text = "Resource Manager" },
+                                new SelectListItem { Text = "Project Manager" },
+                                new SelectListItem { Text = "Employee" }
+                            }, "Please Select")
+        <br />
+        <br />
+        <br />
+        <button class="btn btn-success" id="btnlogin">Log in</button>
+
+        <!--<table class="table table-striped">
         <tr>
             <td>Employee Id</td>
-            <td><input type="text" placeholder="Enter UserName" id="UserName" /></td>
+            <td><input type="text" placeholder="Enter EmployeeId" id="UserName" /></td>
         </tr>
         <tr>
             <td>Password</td>
@@ -16,33 +43,33 @@
             <td>Category</td>
             <td>
                 @Html.DropDownList("Category", new List<SelectListItem>
-                                {
+                                                    {
                                 new SelectListItem { Text = "Admin" },
                                 new SelectListItem { Text = "Resource Manager" },
                                 new SelectListItem { Text = "Project Manager" },
                                 new SelectListItem { Text = "Employee" }
                             }, "Please Select")
-                    </td>
+            </td>
         </tr>
         <tr>
             <td colspan="3">
-                <button class="btn btn-outline-success" id="btnlogin">Log in</button>
-                @* <a class="btn btn-outline-success" asp-controller="Customer" asp-action="Create" style="text-decoration:none;margin:10px">Register </a>
-                <a class="btn btn-outline-success" asp-controller="Home" asp-action="Index" style="text-decoration:none;margin:10px">Cancel </a>*@
-            </td>
+                <button class="btn btn-outline-success" id="btnlogin">Log in</button>-->
+        <!--@* <a class="btn btn-outline-success" asp-controller="Customer" asp-action="Create" style="text-decoration:none;margin:10px">Register </a>
+        <a class="btn btn-outline-success" asp-controller="Home" asp-action="Index" style="text-decoration:none;margin:10px">Cancel </a>*@-->
+        <!--</td>
         </tr>
-    </table>
+    </table>-->
+    </div>
+
 </div>
+    <script type="text/javascript">
+        $('#btnlogin').click(() => {
 
+            let empId = $('#UserName').val();
+            let pass = $('#Password').val();
+            let category = $('#Category').val();
 
-<script type="text/javascript">
-    $('#btnlogin').click(() => {
-
-        let empId = $('#UserName').val();
-        let pass = $('#Password').val();
-        let category = $('#Category').val();
-
-        let item = { EmpId: empId, Password: pass, Designation:category};
+            let item = { EmpId: empId, Password: pass, Designation: category };
 
 
             $.ajax({
@@ -52,7 +79,13 @@
                 contentType: 'application/json',
                 success: function (response) {
                     var output = JSON.stringify(response);
+                    var op1 = output.split(",")[2].split(":")[1].split('"')[1];
+                    sessionStorage.setItem("token", output);
+                    sessionStorage.setItem("Id", op1);
+
                     var op = output.split(",")[1].split(":")[1].split('"')[1];
+                    console.log(output);
+                    console.log(op);
                     if (op == "Admin") {
                         window.location = "/Admin/Index";
                         alert("Welcome!Sucessfully Log in");
@@ -74,4 +107,4 @@
                     alert(err.responseText)
                 }
             });
-    })</script>
+        })</script>

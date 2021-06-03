@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RMS_API.Model;
 using RMS_API.Repository.EmployeeRepository;
 using RMS_API.ViewModel;
 using System;
@@ -24,10 +25,30 @@ namespace RMS_API.Controllers
         {
             _repo.AddEmployeeCredentials(employee);
             return Ok("Data Added Successfully");
-
         }
 
-       
+        [HttpGet("{Id}")]
+        public IActionResult GetEmployeeDetailsById(string Id)
+        {
+            var _employee=_repo.GetEmployeeDetailsById(Id);
+            return Ok(_employee);
+        }
+
+        [HttpPut("Skills/{EmpId}")]
+        public IActionResult UpdateEmployeeSkills(string EmpId, Employee employee)
+        {
+            var updateEmployee = _repo.UpdateEmployeeSkills(EmpId, employee);
+            return Ok(updateEmployee);
+        }
+
+        [HttpPut("Experience/{EmpId}")]
+        public IActionResult UpdateEmployeeExperience(string EmpId, Employee employee)
+        {
+            var updateEmployee = _repo.UpdateEmployeeExperience(EmpId, employee);
+            return Ok(updateEmployee);
+        }
+
+
 
     }
 }

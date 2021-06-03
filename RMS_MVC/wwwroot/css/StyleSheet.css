@@ -1,0 +1,9 @@
+﻿#imgLogin
+{
+    background-image:url('../img/loginPage.jpg');
+    background-size:cover;
+    box-sizing:border-box;
+    background-repeat:no-repeat;
+    height:650px;
+   
+}

@@ -83,7 +83,8 @@ namespace Authenticate_API.Controllers
                     var output = new
                     {
                         token = new JwtSecurityTokenHandler().WriteToken(token),
-                        role = "Admin"
+                        role = "Admin",
+                        id=user.EmpId
                     };
                     return Ok(output);
 
@@ -114,7 +115,9 @@ namespace Authenticate_API.Controllers
                     var output = new
                     {
                         token = new JwtSecurityTokenHandler().WriteToken(token),
-                        role = "Resource Manager"
+                        role = "Resource Manager",
+                        id = user.EmpId
+
                     };
                    
                     return Ok(output);
@@ -145,7 +148,8 @@ namespace Authenticate_API.Controllers
                     var output = new
                     {
                         token = new JwtSecurityTokenHandler().WriteToken(token),
-                        role = "Project Manager"
+                        role = "Project Manager",
+                        id = user.EmpId
                     };
 
                     return Ok(output);
@@ -177,7 +181,8 @@ namespace Authenticate_API.Controllers
                     var output = new
                     {
                         token = new JwtSecurityTokenHandler().WriteToken(token),
-                        role = "Employee"
+                        role = "Employee",
+                        id = user.EmpId
                     };
 
                     return Ok(output);
